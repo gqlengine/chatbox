@@ -1,0 +1,21 @@
+{
+  "__schema": {
+    "types": [
+      {
+        "kind": "INTERFACE",
+        "name": "Message",
+        "possibleTypes": [
+          {
+            "name": "TextMessage"
+          },
+          {
+            "name": "ImageMessage"
+          },
+          {
+            "name": "Notification"
+          }
+        ]
+      }
+    ]
+  }
+}
