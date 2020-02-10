@@ -45,7 +45,6 @@ func main() {
 		panic(err)
 	}
 
-	//playground.SetEndpoints("http://localhost:4000/graphql", "ws://localhost:4000/graphql")
 	playground.SetEndpoints("/api/graphql", "/api/graphql/subscriptions")
 
 	r := mux.NewRouter()
@@ -53,7 +52,7 @@ func main() {
 	r.HandleFunc("/api/graphql/subscriptions", engine.ServeWebsocket)
 	r.PathPrefix("/api/graphql/playground").Handler(playground.GetHandle("/api/graphql/playground"))
 
-	//r.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(AssetFile())))
+	r.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(AssetFile())))
 
 	println("open demo page at: http://localhost:9996/")
 	println("open playground http://localhost:9996/api/graphql/playground/")

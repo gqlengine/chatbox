@@ -185,7 +185,7 @@ func favicon665279c7Png() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "favicon.665279c7.png", size: 7184, mode: os.FileMode(420), modTime: time.Unix(1581344778, 0)}
+	info := bindataFileInfo{name: "favicon.665279c7.png", size: 7184, mode: os.FileMode(420), modTime: time.Unix(1581345215, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -205,7 +205,7 @@ func indexHtml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "index.html", size: 330, mode: os.FileMode(420), modTime: time.Unix(1581344778, 0)}
+	info := bindataFileInfo{name: "index.html", size: 330, mode: os.FileMode(420), modTime: time.Unix(1581345215, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -225,7 +225,7 @@ func web03e32a67Css() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "web.03e32a67.css", size: 132898, mode: os.FileMode(420), modTime: time.Unix(1581344778, 0)}
+	info := bindataFileInfo{name: "web.03e32a67.css", size: 132898, mode: os.FileMode(420), modTime: time.Unix(1581345215, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -245,7 +245,7 @@ func web76dc9900Css() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "web.76dc9900.css", size: 554194, mode: os.FileMode(420), modTime: time.Unix(1581344778, 0)}
+	info := bindataFileInfo{name: "web.76dc9900.css", size: 554194, mode: os.FileMode(420), modTime: time.Unix(1581345215, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -265,7 +265,7 @@ func web76dc9900Js() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "web.76dc9900.js", size: 130389, mode: os.FileMode(420), modTime: time.Unix(1581344778, 0)}
+	info := bindataFileInfo{name: "web.76dc9900.js", size: 130389, mode: os.FileMode(420), modTime: time.Unix(1581345215, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -285,7 +285,7 @@ func webF2ace0adJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "web.f2ace0ad.js", size: 1279257, mode: os.FileMode(420), modTime: time.Unix(1581344778, 0)}
+	info := bindataFileInfo{name: "web.f2ace0ad.js", size: 1279257, mode: os.FileMode(420), modTime: time.Unix(1581345215, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
