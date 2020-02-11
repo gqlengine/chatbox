@@ -24,7 +24,6 @@ func messageLoop() {
 		case msg := <-subChan:
 			messageLock.Lock()
 			for username, subscription := range clients {
-				fmt.Printf("send to %s: %+v\n", username, msg)
 				err := subscription.SendData(msg)
 				if err != nil {
 					fmt.Printf("send to %s error %s", username, err.Error())
@@ -94,7 +93,8 @@ func SendImageMessage(params *struct {
 			Sender:   params.Sender,
 			SentTime: time.Now(),
 		},
-		Image: b64Content,
+		MimeType: params.Image.Header.Get("Content-Type"),
+		Image:    b64Content,
 	})
 	return nil
 }

@@ -14,6 +14,7 @@ const messageParts = `
         text
     }
     ... on ImageMessage {
+        mimeType
         image
     }
 `;
@@ -65,10 +66,11 @@ export default function Chatbox() {
         let content = null;
         switch (msg.__typename) {
             case 'TextMessage':
-                content = <span>{msg.text}</span>
+                content = <span>{msg.text}</span>;
                 break;
             case 'ImageMessage':
-                content = <img src={msg.image} style={{width:130,height:130,borderRadius:'4',margin:'0 auto',display:'block'}} />
+                const bg = `url(data:${msg.mimeType};base64,${msg.image})`;
+                content = <span className={styles.image} style={{backgroundImage: bg}} />
                 break;
         }
         const key = `${msg.sender} - ${msg.sentTime}`;

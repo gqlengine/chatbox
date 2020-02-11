@@ -42,7 +42,8 @@ type ImageMessage struct {
 	IsObject
 	MessageBase
 
-	Image string `json:"image"`
+	MimeType string `json:"mimeType"`
+	Image    string `json:"image"`
 }
 
 type Notification struct {

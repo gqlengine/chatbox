@@ -1,15 +1,23 @@
 import React, {useState} from 'react';
 import {useMutation} from 'react-apollo';
 import gql from "graphql-tag";
-import {Button, Col, Input, message, Row} from "antd";
+import {Button, Col, Icon, Input, message, Row, Upload} from "antd";
 
-export default function MessageInput({sender, setSender}) {
+export default function MessageInput({sender}) {
     const [text, setText] = useState('');
     const [sendTextMessage, {loading: sendingTextMessage}] = useMutation(gql`
         mutation($text: String!) {
             sendTextMessage(
                 sender: "${sender}",
                 text: $text,
+            )
+        }
+    `);
+    const [sendImageMessage, {loading: sendingImageMessage}] = useMutation(gql`
+        mutation($image: Upload!) {
+            sendImageMessage(
+                sender: "${sender}",
+                image: $image,
             )
         }
     `);
@@ -32,6 +40,18 @@ export default function MessageInput({sender, setSender}) {
         })
     };
 
+    const upload = ({file, onProgress, onError, onSuccess}) => {
+        sendImageMessage({
+            variables: {
+                image: file,
+            }
+        }).then(() => {
+            onSuccess()
+        }).catch((err) => {
+            onError(err)
+        })
+    };
+
     return <div>
         <Row>
         <Input.TextArea placeholder='input your message here!'
@@ -40,16 +60,22 @@ export default function MessageInput({sender, setSender}) {
                         onChange={typeMessage}/>
         </Row>
         <Row style={{marginTop: 10}} type='flex' justify='space-between'>
-            <span>
-            Username:
-            <Input style={{width: 'auto', marginLeft: 5}} value={sender} onChange={(e) => {
-                e.preventDefault();
-                setSender(e.target.value);
-            }}/>
-            </span>
+            <Upload
+                accept='.jpg,.jpeg,.png'
+                customRequest={upload}
+                showUploadList={false}
+            >
+                <Button loading={sendingImageMessage}>
+                    <Icon type='upload'/>
+                    Send image
+                </Button>
+            </Upload>
             <Button onClick={sendMessage}
                     type='primary'
-                    loading={sendingTextMessage}>Send</Button>
+                    loading={sendingTextMessage}>
+                <Icon type='thunderbolt'/>
+                Send
+            </Button>
         </Row>
     </div>
 }

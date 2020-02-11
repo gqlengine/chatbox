@@ -12,8 +12,13 @@ import Chatbox from "./components/Chatbox";
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 import {message} from 'antd';
+import {createUploadLink} from 'apollo-upload-client';
 
 const httpLink = new HttpLink({
+    uri: 'http://localhost:9996/api/graphql',
+});
+
+const uploadLink = new createUploadLink({
     uri: 'http://localhost:9996/api/graphql',
 });
 
@@ -57,6 +62,17 @@ const errLink = onError(
     }
 );
 
+function containsUpload(typ) {
+    if (typ.name && typ.name.kind === 'Name' && typ.name.value === 'Upload') {
+        return true
+    } else if (typ.kind === 'NonNullType') {
+        return containsUpload(typ.type)
+    } else if (typ.kind === 'ListType') {
+        return containsUpload(typ.type)
+    }
+    return false
+}
+
 const link = split(
     ({ query }) => {
         const definition = getMainDefinition(query);
@@ -66,7 +82,20 @@ const link = split(
         );
     },
     wsLink,
-    httpLink,
+    split(
+        ({query}) => {
+            const definition = getMainDefinition(query);
+            console.log("-->", definition);
+            for (const vd of definition.variableDefinitions) {
+                if (containsUpload(vd.type)) {
+                    return true
+                }
+            }
+            return false
+        },
+        uploadLink,
+        httpLink,
+    ),
 );
 
 export const apolloClient = new ApolloClient({
